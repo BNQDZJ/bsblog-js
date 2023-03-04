@@ -41,3 +41,17 @@ function playMpd(video, url, art) {
         art.notice.show = 'Unsupported playback format: mpd';
     }
 }
+function playTorrent(video, url, art) {
+    const torrent = new WebTorrent();
+    torrent.add(url, function (torrent) {
+        var file = torrent.files[0];
+        file.renderTo(video, {
+            autoplay: art.option.autoplay,
+        });
+    });
+
+    // optional
+    art.torrent = torrent;
+    art.once('url', () => torrent.destroy());
+    art.once('destroy', () => torrent.destroy());
+}
