@@ -27,7 +27,7 @@ async function Preview() {
   .then(result => {
       data = result
       url = data.getUrl
-      Apple_mp4_F1()
+      Apple_mp4_url()
   })
   })
   .catch(error => console.error(error))
